@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-#if UNITY_EDITOR
 /// <summary>
 /// ログ用のタグ
 /// </summary>
@@ -10,6 +9,7 @@ public enum LogTag {
     Invalid = -1,
     Debug,
     Scene,
+    Data,
     Audio,
 }
 
@@ -85,7 +85,4 @@ public abstract class LogController : MonoBehaviour
 
         Debug.Log(resizedMsg);
     }
-
-    
 }
-#endif

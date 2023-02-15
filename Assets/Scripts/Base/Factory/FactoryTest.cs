@@ -10,7 +10,12 @@ namespace Example {
 		{
 
 		}
-	}
+
+        public override void Generated()
+        {
+            
+        }
+    }
 
 	class FactoryTest : FactoryWithList {
 		[SerializeField] ProductTest product;
