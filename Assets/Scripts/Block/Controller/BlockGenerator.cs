@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class BlockGenerator : FactoryWithList
 {
-    const int blockCount = 3;
-    [NonReorderable,SerializeField] BlockBase[] blocks = new BlockBase[blockCount];
+    [SerializeField] List<BlockBase> blocks = new List<BlockBase>();
 
     //--------------------------------------------------
 
