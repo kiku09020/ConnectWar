@@ -5,8 +5,7 @@ using UnityEngine;
 public class BlockGenerator : FactoryWithList
 {
     [SerializeField] List<BlockBase> blocks = new List<BlockBase>();
-
-    [SerializeField] Transform parent;
+    [SerializeField] SpriteRenderer rend;
 
     //--------------------------------------------------
 
@@ -20,13 +19,14 @@ public class BlockGenerator : FactoryWithList
 
     public void Generate()
     {
-        GetProduct(transform.position, Quaternion.identity, parent);
+        GetProduct(transform.position, Quaternion.identity);
     }
 
-    public override ProductBase GetProduct(Vector3 pos, Quaternion rot, Transform parent)
+    public override ProductBase GetProduct(Vector3 pos, Quaternion rot, Transform parent = null)
     {
         var block = Instantiate(blocks[0], pos, rot, parent);
 
+        block.SetBlockColor(rend.color);
         block.Initialize();
 
         return block;

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 371940095998293896}
   - component: {fileID: 371940095998293897}
   - component: {fileID: 371940095998293898}
+  - component: {fileID: 5363999950214329834}
   m_Layer: 7
   m_Name: StageBlocks_Base
   m_TagString: Stage
@@ -137,3 +138,23 @@ TilemapCollider2D:
   m_Offset: {x: 0, y: 0}
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0.00001
+--- !u!114 &5363999950214329834
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 371940095998293900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ecfcdc458675f646b263189edf71a57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _collider: {fileID: 371940095998293898}
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  targetTag: 
+  grid: {fileID: 0}
+  tilemap: {fileID: 371940095998293896}
+  tile: {fileID: 11400000, guid: da94bdc5f50b08442bf0e4f93cb7c796, type: 2}

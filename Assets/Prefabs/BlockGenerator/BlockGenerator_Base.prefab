@@ -99,8 +99,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blocks:
-  - {fileID: 3302416284952938988, guid: 35e1ba8bf46b7b947b06e606bde6763c, type: 3}
-  parent: {fileID: 0}
+  - {fileID: 4757116910913557244, guid: 35e1ba8bf46b7b947b06e606bde6763c, type: 3}
+  rend: {fileID: 1263520554227737158}
 --- !u!114 &1263520554227737209
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -6,15 +6,16 @@ public abstract class BlockBase : ProductBase
 {
     protected BlockData data;
 
-    [SerializeField] LayerMask layer;
+	[SerializeField] SpriteRenderer rend;
 
-    public override void Initialize()
+	public override void Initialize()
     {
         data = BlockData_ScObj.LoadData(this);
     }
 
-    public override void Generated()
-    {
-        
-    }
+    public void SetBlockColor(Color color)
+	{
+        var blockColor = new Color(color.r, color.g, color.b, 1);
+        rend.color = blockColor;
+	}
 }

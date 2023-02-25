@@ -21,7 +21,6 @@ public class BlockData_ScObj : ScriptableObject
 
         foreach(var blockData in scrptObj.blockDataList) {
             if (blockData.Name + "Block" == blockTypeName) {
-                LogController.ColoredLog($"{blockTypeName}のデータが適用されました", Color.yellow, LogTag.Data);
                 return blockData;
             }
         }
