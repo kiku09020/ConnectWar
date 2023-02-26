@@ -4,8 +4,4 @@ using UnityEngine;
 
 public class NormalBlock : BlockBase
 {
-    public override void Initialize()
-    {
-        base.Initialize();
-    }
 }

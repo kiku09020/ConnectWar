@@ -5,7 +5,8 @@ using UnityEngine.Events;
 
 public class ButtonBase : MonoBehaviour
 {
-    [SerializeField] UnityEvent pushedEvent;
+	[Header("’·‰Ÿ‚µ")]
+    [SerializeField] UnityEvent holdingEvent;
 	[SerializeField] int waitFrame;
 	int holdingFrame;
 
@@ -21,7 +22,7 @@ public class ButtonBase : MonoBehaviour
 		HoldCheck();
 
 		if (IsHeld) {
-			pushedEvent.Invoke();
+			holdingEvent.Invoke();
 		}
 	}
 

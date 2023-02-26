@@ -9,27 +9,25 @@ public class StageHitChecker : HitCheckerBase
 	[SerializeField] Tilemap tilemap;
 	[SerializeField] Tile tile;
 
-	GameObject hitBlock;
-
-	public GameObject HitBlock => hitBlock;
-
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
 		if (CheckLayerMask(TargetLayer, collision.gameObject.layer)) {
 			IsHit = true;
-			hitBlock = collision.gameObject;
 
-			var pos = grid.WorldToCell(hitBlock.transform.position);
+			var block = collision.gameObject;
+			var pos = grid.WorldToCell(block.transform.position);
+
+			tile.color = block.GetComponent<SpriteRenderer>().color;
 			tilemap.SetTile(pos, tile);
 
+			Destroy(block);
 
-			Destroy(collision.gameObject);
+			MainGameManager.ChangeTurn();
 		}
 	}
 
 	private void OnTriggerExit2D(Collider2D collision)
 	{
 		IsHit = false;
-		hitBlock = null;
 	}
 }

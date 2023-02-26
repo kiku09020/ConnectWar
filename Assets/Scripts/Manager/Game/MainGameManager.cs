@@ -5,29 +5,35 @@ using UnityEngine.InputSystem;
 
 using GameController;
 
-public class MainGameManager : MonoBehaviour
+public class MainGameManager : SimpleSingleton<MainGameManager>
 {
-    [SerializeField] GameStateMachine state;
+    [SerializeField] GameStateMachine state;        // ゲームステート
 
-    // Start is called before the first frame update
-    void Awake()
-    {
-        
-    }
+    [SerializeField] bool isPermanent;
+
+    public bool IsPermanent => isPermanent;
+
+    public static bool IsTurn { get; private set; }        // プレイヤーのターンか
 
     private void Start()
     {
-        BGM.Instance.Play(AudioNames.BGM_PALETTE,0,0.5f,1);
+        IsTurn = true;
+
+        BGM.Instance.Play(AudioNames.BGM_PALETTE,0,0.5f,1);     // BGM再生
     }
 
-    private void Update()
-	{
-        
-	}
-
-	// Update is called once per frame
 	void FixedUpdate()
     {
-        state.StateUpdate();
+        state.StateUpdate();            // 状態更新
     }
+    
+    /// <summary>
+    /// ターン変更
+    /// </summary>
+    public static void ChangeTurn()
+	{
+		if (!Instance.isPermanent) {
+            IsTurn = !IsTurn;
+		}
+	}
 }

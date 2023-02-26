@@ -6,11 +6,16 @@ using UnityEngine;
 
 namespace Example {
 	class ProductTest : ProductBase {
-		public override void Initialize()
+		public override void Initialize(IFactoryInfo info)
 		{
 
 		}
-    }
+
+		public override void Generated()
+		{
+			
+		}
+	}
 
 	class FactoryTest : FactoryWithList {
 		[SerializeField] ProductTest product;
@@ -20,7 +25,7 @@ namespace Example {
 			var instance = Instantiate(product.gameObject, pos, rot, parent);       // 生成
 			var generatedProduct = instance.GetComponent<ProductTest>();            // コンポーネント取得
 
-			generatedProduct.Initialize();              // 初期化
+			generatedProduct.Initialize(this);              // 初期化
 			AddToGeneratedList(generatedProduct);       // リストに追加
 
 			return generatedProduct;
@@ -35,7 +40,7 @@ namespace Example {
 			var instance = Instantiate(product.gameObject, pos, rot, parent);
 			var generatedProduct = instance.GetComponent<ProductTest>();
 
-			generatedProduct.Initialize();
+			generatedProduct.Initialize(this);
 			AddToGeneratedDict(generatedProduct, instance.name);
 
 			return generatedProduct;

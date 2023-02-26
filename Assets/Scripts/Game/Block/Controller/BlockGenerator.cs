@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class BlockGenerator : FactoryWithList
+public class BlockGenerator : FactoryWithList,IBlockGeneratorInfo
 {
     [SerializeField] List<BlockBase> blocks = new List<BlockBase>();
     [SerializeField] SpriteRenderer rend;
+
+    public SpriteRenderer Renderer => rend;
 
     //--------------------------------------------------
 
@@ -13,21 +16,23 @@ public class BlockGenerator : FactoryWithList
     {
         // ÉuÉçÉbÉNÇÃèâä˙âª
         foreach(var block in blocks) {
-            block.Initialize();
+            block.Initialize(this);
         }
     }
 
     public void Generate()
     {
-        GetProduct(transform.position, Quaternion.identity);
+		if (MainGameManager.IsTurn) {
+            GetProduct(transform.position, Quaternion.identity);
+		}
     }
 
     public override ProductBase GetProduct(Vector3 pos, Quaternion rot, Transform parent = null)
     {
-        var block = Instantiate(blocks[0], pos, rot, parent);
+        var targetPos = new Vector3(pos.x, pos.y - 1, pos.z);
+        var block = Instantiate(blocks[0], targetPos, rot, parent);
 
-        block.SetBlockColor(rend.color);
-        block.Initialize();
+        block.Generated();
 
         return block;
     }

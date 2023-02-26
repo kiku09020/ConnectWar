@@ -11,6 +11,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BG_Rival
       objectReference: {fileID: 0}
+    - target: {fileID: 1263520554227737157, guid: f14372a58035ed045a0ed95ebfb5f48d, type: 3}
+      propertyPath: m_TagString
+      value: Rival
+      objectReference: {fileID: 0}
     - target: {fileID: 1263520554227737158, guid: f14372a58035ed045a0ed95ebfb5f48d, type: 3}
       propertyPath: m_Color.b
       value: 0
