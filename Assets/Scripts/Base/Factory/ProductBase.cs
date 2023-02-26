@@ -5,10 +5,10 @@ public abstract class ProductBase :MonoBehaviour
     /// <summary>
     /// ‰Šú‰»(Awake,Start‚ÅŒÄ‚Ño‚³‚ê‚é)
     /// </summary>
-    public abstract void Initialize(IFactoryInfo genInfo);
+    public abstract void Initialize();
 
     /// <summary>
     /// ¶¬(GetProduct‚ÅŒÄ‚Ño‚³‚ê‚é)
     /// </summary>
-    public abstract void Generated();
+    public abstract void Generated(IFactoryInfo genInfo);
 }

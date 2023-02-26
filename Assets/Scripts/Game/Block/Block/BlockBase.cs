@@ -8,14 +8,14 @@ public abstract class BlockBase : ProductBase
 
 	[SerializeField] SpriteRenderer rend;
 
-	public override void Initialize(IFactoryInfo generatorInfo) 
+	public override void Initialize() 
     {
         data = BlockData_ScObj.LoadData(this);
-		SetBlockColor(generatorInfo as IBlockGeneratorInfo);
     }
 
-	public override void Generated()
+	public override void Generated(IFactoryInfo generatorInfo)
 	{
+		SetBlockColor(generatorInfo as IBlockGeneratorInfo);
 		
 	}
 

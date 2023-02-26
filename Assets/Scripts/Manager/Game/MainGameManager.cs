@@ -11,9 +11,15 @@ public class MainGameManager : SimpleSingleton<MainGameManager>
 
     [SerializeField] bool isPermanent;
 
+    /// <summary>
+    /// 永久にプレイヤーのターンにする
+    /// </summary>
     public bool IsPermanent => isPermanent;
 
-    public static bool IsTurn { get; private set; }        // プレイヤーのターンか
+    /// <summary>
+    /// プレイヤーのターンか
+    /// </summary>
+    public static bool IsTurn { get; private set; }
 
     private void Start()
     {

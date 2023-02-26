@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /* !Example Classes! */
-
+#if false
 namespace Example {
 	class ProductTest : ProductBase {
 		public override void Initialize(IFactoryInfo info)
@@ -47,3 +47,5 @@ namespace Example {
 		}
 	}
 }
+
+#endif

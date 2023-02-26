@@ -3,16 +3,27 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class Stage : MonoBehaviour
-{
+public class Stage : MonoBehaviour {
 	[Header("Tilemap")]
 	[SerializeField] Tilemap tilemap;
+	[SerializeField] Grid grid;
 
-    public enum TilemapType {
-        player,
-        rival,
-        stage,
+	public enum TilemapType {
+		player,
+		rival,
+		stage,
 	}
+
+
+	// 方向
+	static readonly Vector2Int[] Directions = {
+		Vector2Int.right,					// 右
+		Vector2Int.up,						// 上
+		Vector2Int.up+Vector2Int.right,		// 右上
+		Vector2Int.up+Vector2Int.left,		// 左上
+	};
+
+	public Tilemap Tilemap => tilemap;
 
     //--------------------------------------------------
 
@@ -21,30 +32,57 @@ public class Stage : MonoBehaviour
 		
     }
 
+	public BoundsInt GetBounds()
+	{
+		var bounds = tilemap.cellBounds;
+		tilemap.CompressBounds();
+		return bounds;
+	}
+
+	public Vector3Int GetGridPosition(Vector2 position)
+	{
+		return grid.WorldToCell(position);
+	}
+
 	/// <summary>
-	/// 全てのタイルマップをまとめたタイルマップを取得
+	/// ブロック設置可能か
 	/// </summary>
-	//public Tilemap GetTilemap()
-	//{
-	//	tilemap.CompressBounds();
+	/// <param name="tilemap"></param>
+	public static bool CanDropBlock(Tilemap tilemap,int targetX)
+	{
+		var targetTile = tilemap.GetTile(new Vector3Int(targetX, 0));
 
-	//	var bounds = tilemap.cellBounds;
-	//	var tiles = tilemap.GetTilesBlock(bounds);
+		// 指定座標にあれば設置不可
+		if (targetTile) {
+			return false;
+		}
 
-	//	for (int y = bounds.yMin; y < bounds.yMax; y++) {
-	//		for (int x = bounds.xMin; x < bounds.xMax; x++) {
-	//			var tilePosition = new Vector3Int(x, y);
-	//			var tile = tiles[(x - bounds.xMin) + (y - bounds.yMin) * bounds.size.x] as Tile;
-	//		}
-	//	}
+		// なければ設置可能
+		return true;
+	}
 
-	//	return tilemap;
-	//}
+	/// <summary>
+	/// 繋がってる数を取得する
+	/// </summary>
+	public static int GetConnectedCount(Vector2Int tilePos, Tilemap tilemap, Color targetColor)
+	{
+		var count = 0;
+		foreach(var dir in Directions) {
+			var targetPos = (Vector3Int)(tilePos + dir);
+			var tile = tilemap.GetTile(targetPos) as Tile;
 
-    /// <summary>
-    /// 指定のタイルマップの指定の位置のタイルを取得
-    /// </summary>
-    public TileBase GetTile(TilemapType type,Vector3Int tilePosition)
+			if (tile?.color == targetColor) {
+				count++;
+			}
+		}
+
+		return count;
+	}
+
+	/// <summary>
+	/// 指定のタイルマップの指定の位置のタイルを取得
+	/// </summary>
+	public TileBase GetTile(TilemapType type,Vector3Int tilePosition)
 	{
         return tilemap.GetTile(tilePosition);
 	}
